@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Coffee & Conversations Sign-In</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
+  .card{background:#fff;border-radius:20px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .header{text-align:center;margin-bottom:20px}
+  .header h1{font-size:22px;color:#0f3460;line-height:1.2}
+  .header .subtitle{font-size:14px;color:#666;margin-top:6px}
+  .halloween-bar{background:linear-gradient(90deg,#ff6f00,#e65100,#ff6f00);padding:10px;border-radius:12px;text-align:center;color:#fff;font-size:15px;margin-bottom:18px;font-weight:600}
+  .event-info{background:#f0f7ff;border-radius:12px;padding:14px;margin-bottom:20px;font-size:13px;color:#333;line-height:1.5}
+  .event-info strong{color:#0f3460}
+  .sponsors{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px;font-size:12px;color:#888}
+  .sponsors .sep{color:#ccc}
+  label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:5px;margin-top:14px}
+  input,select,textarea{width:100%;padding:12px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;transition:border .2s;-webkit-appearance:none;appearance:none;background:#fff}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:#0f3460}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+  textarea{resize:vertical;min-height:60px}
+  .btn{display:block;width:100%;padding:14px;background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;margin-top:20px;transition:transform .15s,box-shadow .15s}
+  .btn:active{transform:scale(.97)}
+  .success{display:none;text-align:center;padding:40px 20px}
+  .success h2{color:#0f3460;font-size:24px;margin-bottom:10px}
+  .success p{color:#666;font-size:15px}
+  .checkmark{font-size:60px;margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div id="formSection">
+    <div class="header">
+      <h1>Coffee &amp; Conversations</h1>
+      <div class="subtitle">Event Sign-In</div>
+    </div>
+    <div class="halloween-bar">&#127875; Happy Halloween Edition &#127875;</div>
+    <div class="event-info">
+      <strong>Date:</strong> Tuesday, October 27, 2026<br>
+      <strong>Time:</strong> 9:00 AM - 11:00 AM<br>
+      <strong>Host:</strong> Fort Lauderdale Behavioral Health Center
+    </div>
+    <div class="sponsors">
+      FLBHC <span class="sep">x</span> Greenbrook Mental Wellness Centers
+    </div>
+    <form id="signinForm" onsubmit="handleSubmit(event)">
+      <label for="name">Full Name *</label>
+      <input type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Doe">
+      <label for="organization">Organization / Agency</label>
+      <input type="text" id="organization" name="organization" autocomplete="organization" placeholder="Your organization">
+      <label for="title">Title / Role</label>
+      <input type="text" id="title" name="title" placeholder="e.g. Clinical Director">
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 555-5555">
+      <label for="referralType">Primary Referral Interest</label>
+      <select id="referralType" name="referralType">
+        <option value="">-- Select --</option>
+        <option value="Adult Inpatient">Adult Inpatient</option>
+        <option value="Adolescent Inpatient">Adolescent Inpatient</option>
+        <option value="Adult IOP/PHP">Adult IOP/PHP</option>
+        <option value="Adolescent IOP">Adolescent IOP</option>
+        <option value="Geriatric">Geriatric</option>
+        <option value="Detox">Detox</option>
+        <option value="General Info">General Info / Networking</option>
+      </select>
+      <label for="notes">How did you hear about this event?</label>
+      <textarea id="notes" name="notes" rows="2" placeholder="Email, colleague, social media..."></textarea>
+      <button type="submit" class="btn">Sign In</button>
+    </form>
+  </div>
+  <div class="success" id="successSection">
+    <div class="checkmark">&#9989;</div>
+    <h2>You're signed in!</h2>
+    <p>Welcome to Coffee &amp; Conversations.<br>Enjoy the event!</p>
+  </div>
+</div>
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  var fd=new FormData(e.target);
+  var data={};
+  fd.forEach(function(v,k){data[k]=v});
+  var entries=JSON.parse(localStorage.getItem('cc_signins')||'[]');
+  data.timestamp=new Date().toISOString();
+  entries.push(data);
+  localStorage.setItem('cc_signins',JSON.stringify(entries));
+  document.getElementById('formSection').style.display='none';
+  document.getElementById('successSection').style.display='block';
+  setTimeout(function(){
+    document.getElementById('formSection').style.display='block';
+    document.getElementById('successSection').style.display='none';
+    e.target.reset();
+  },3000);
+}
+</script>
+</body>
+</html>
