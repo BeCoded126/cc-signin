@@ -2,63 +2,97 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Coffee & Conversations Sign-In</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FCF6EC">
+<title>Coffee &amp; Conversations Sign-In · Nov 24</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --brown:#5B2C1A; --orange:#C8642A; --rust:#B8561F; --sage:#56744F;
+    --tan:#E3C29A; --line:#EBDCCB; --body:#6E5A4E; --cream:#FCF6EC; --peach:#FBEBDD;
+  }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}
-  .card{background:#fff;border-radius:20px;padding:28px 24px;max-width:420px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3)}
-  .header{text-align:center;margin-bottom:20px}
-  .header h1{font-size:22px;color:#0f3460;line-height:1.2}
-  .header .subtitle{font-size:14px;color:#666;margin-top:6px}
-  .halloween-bar{background:linear-gradient(90deg,#ff6f00,#e65100,#ff6f00);padding:10px;border-radius:12px;text-align:center;color:#fff;font-size:15px;margin-bottom:18px;font-weight:600}
-  .event-info{background:#f0f7ff;border-radius:12px;padding:14px;margin-bottom:20px;font-size:13px;color:#333;line-height:1.5}
-  .event-info strong{color:#0f3460}
-  .sponsors{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:18px;font-size:12px;color:#888}
-  .sponsors .sep{color:#ccc}
-  label{display:block;font-size:13px;font-weight:600;color:#333;margin-bottom:5px;margin-top:14px}
-  input,select,textarea{width:100%;padding:12px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:16px;transition:border .2s;-webkit-appearance:none;appearance:none;background:#fff}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:#0f3460}
-  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
-  textarea{resize:vertical;min-height:60px}
-  .btn{display:block;width:100%;padding:14px;background:linear-gradient(135deg,#0f3460,#16213e);color:#fff;border:none;border-radius:12px;font-size:17px;font-weight:700;cursor:pointer;margin-top:20px;transition:transform .15s,box-shadow .15s}
-  .btn:active{transform:scale(.97)}
-  .success{display:none;text-align:center;padding:40px 20px}
-  .success h2{color:#0f3460;font-size:24px;margin-bottom:10px}
-  .success p{color:#666;font-size:15px}
-  .checkmark{font-size:60px;margin-bottom:16px}
+  body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:var(--cream);background-image:radial-gradient(circle at 100% 0,#F6E2CB 0,rgba(246,226,203,0) 340px),
+    radial-gradient(circle at 0 100%,#F3E6D6 0,rgba(243,230,214,0) 300px);
+    color:var(--brown);min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px 40px}
+  .card{background:#fff;border:1px solid var(--tan);border-radius:22px;padding:26px 22px 24px;max-width:430px;width:100%;
+    box-shadow:0 18px 50px rgba(91,44,26,.10)}
+  .header{text-align:center}
+  .pie{display:block;margin:0 auto 6px}
+  .eyebrow{font-size:10.5px;font-weight:700;letter-spacing:.16em;line-height:1.6;color:var(--rust);text-transform:uppercase}
+  h1{font-size:27px;line-height:1.15;font-weight:800;margin-top:8px;letter-spacing:-.01em}
+  h1 .amp{color:var(--orange)}
+  .subtitle{font-size:14px;color:var(--body);margin-top:4px;font-weight:500}
+  .pill{display:inline-block;margin-top:14px;background:var(--peach);color:var(--rust);border-radius:999px;
+    padding:7px 14px;font-size:13px;font-weight:700}
+  .info{margin:18px 0 6px;border:1px solid var(--line);border-radius:14px;padding:4px 14px}
+  .row{padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.4}
+  .row:last-child{border-bottom:0}
+  .row .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;color:var(--rust);margin-bottom:3px}
+  .row .v{color:var(--brown);font-weight:600}
+  .row .v small{display:block;font-weight:500;color:var(--body);font-size:13px}
+  form{margin-top:8px}
+  label{display:block;font-size:13px;font-weight:700;color:var(--brown);margin:16px 0 6px}
+  label .opt{font-weight:500;color:var(--body)}
+  input,select,textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:16px;
+    color:var(--brown);background:#fff;-webkit-appearance:none;appearance:none;transition:border-color .15s,box-shadow .15s}
+  input::placeholder,textarea::placeholder{color:#B9A797}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(200,100,42,.15)}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236E5A4E' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+  textarea{resize:vertical;min-height:64px}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .btn{display:block;width:100%;min-height:52px;padding:14px;margin-top:22px;background:var(--orange);color:#fff;border:0;border-radius:14px;
+    font:inherit;font-size:17px;font-weight:800;letter-spacing:.01em;cursor:pointer;transition:background .15s,transform .1s}
+  .btn:active{transform:scale(.98);background:var(--rust)}
+  .btn[disabled]{opacity:.7;cursor:default}
+  .status{min-height:20px;margin-top:10px;font-size:14px;color:#A33A1F;text-align:center;font-weight:600}
+  .success{display:none;text-align:center;padding:26px 6px 8px}
+  .success h2{font-size:25px;font-weight:800;margin:14px 0 8px}
+  .success p{color:var(--body);font-size:15px;line-height:1.5}
+  .again{margin-top:22px;background:none;border:1.5px solid var(--tan);color:var(--brown);border-radius:12px;padding:12px 18px;
+    font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:44px}
+  .foot{margin-top:18px;text-align:center;font-size:11.5px;color:var(--body);line-height:1.5}
 </style>
 </head>
 <body>
-<div class="card">
-  <div id="formSection">
+<main class="card">
+  <section id="formSection">
     <div class="header">
-      <h1>Coffee &amp; Conversations</h1>
-      <div class="subtitle">Event Sign-In</div>
+      <svg class="pie" width="76" height="54" viewBox="0 0 76 54" aria-hidden="true">
+        <path d="M8 42 L62 24 L62 46 Z" fill="#E07B2E"/>
+        <path d="M8 42 L62 24 L62 29.5 L11 43.6 Z" fill="#F2B866"/>
+        <path d="M8 42 L62 46 L62 48.5 L10 44.2 Z" fill="#C9772D"/>
+        <rect x="58.5" y="21" width="10" height="29" rx="5" fill="#D9963F"/>
+        <g fill="#fff" stroke="#F0E2D2" stroke-width="1"><circle cx="40.5" cy="27.5" r="5.2"/><circle cx="47.5" cy="25.2" r="4.8"/><circle cx="44" cy="20.6" r="4.3"/></g>
+      </svg>
+      <div class="eyebrow">Fort Lauderdale<br>Behavioral Health Center</div>
+      <h1>Coffee <span class="amp">&amp;</span> Conversations</h1>
+      <div class="subtitle">Event sign-in</div>
+      <div class="pill">&#129383; Last one of the year</div>
     </div>
-    <div class="halloween-bar">&#127875; Happy Halloween Edition &#127875;</div>
-    <div class="event-info">
-      <strong>Date:</strong> Tuesday, October 27, 2026<br>
-      <strong>Time:</strong> 9:00 AM - 11:00 AM<br>
-      <strong>Host:</strong> Fort Lauderdale Behavioral Health Center
+    <div class="info">
+      <div class="row"><div class="k">WHEN</div><div class="v">Tuesday, November 24, 2026<small>9:00 – 11:00 AM</small></div></div>
+      <div class="row"><div class="k">WHERE</div><div class="v">FLBHC Auditorium<small>951 NE 56th Street, Oakland Park</small></div></div>
+      <div class="row"><div class="k">PARTNERS</div><div class="v">Adolescent Wellness Academy<br>Principles Recovery Center</div></div>
     </div>
-    <div class="sponsors">
-      FLBHC <span class="sep">x</span> Greenbrook Mental Wellness Centers
-    </div>
-    <form id="signinForm" onsubmit="handleSubmit(event)">
-      <label for="name">Full Name *</label>
+    <form id="signinForm" novalidate>
+      <label for="name">Full name</label>
       <input type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Doe">
-      <label for="organization">Organization / Agency</label>
+      <label for="organization">Organization / agency <span class="opt">(optional)</span></label>
       <input type="text" id="organization" name="organization" autocomplete="organization" placeholder="Your organization">
-      <label for="title">Title / Role</label>
-      <input type="text" id="title" name="title" placeholder="e.g. Clinical Director">
-      <label for="email">Email *</label>
-      <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com">
-      <label for="phone">Phone</label>
-      <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(555) 555-5555">
-      <label for="referralType">Primary Referral Interest</label>
+      <label for="title">Title / role <span class="opt">(optional)</span></label>
+      <input type="text" id="title" name="title" autocomplete="organization-title" placeholder="e.g. Clinical Director">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="you@example.com">
+      <label for="phone">Phone <span class="opt">(optional)</span></label>
+      <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555">
+      <label for="referralType">Primary referral interest <span class="opt">(optional)</span></label>
       <select id="referralType" name="referralType">
-        <option value="">-- Select --</option>
+        <option value="">Select one</option>
         <option value="Adult Inpatient">Adult Inpatient</option>
         <option value="Adolescent Inpatient">Adolescent Inpatient</option>
         <option value="Adult IOP/PHP">Adult IOP/PHP</option>
@@ -67,35 +101,79 @@
         <option value="Detox">Detox</option>
         <option value="General Info">General Info / Networking</option>
       </select>
-      <label for="notes">How did you hear about this event?</label>
+      <label for="notes">How did you hear about this event? <span class="opt">(optional)</span></label>
       <textarea id="notes" name="notes" rows="2" placeholder="Email, colleague, social media..."></textarea>
-      <button type="submit" class="btn">Sign In</button>
+      <div class="hp" aria-hidden="true"><label for="website">Website</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <button type="submit" class="btn" id="submitBtn">Sign In</button>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
     </form>
-  </div>
-  <div class="success" id="successSection">
-    <div class="checkmark">&#9989;</div>
-    <h2>You're signed in!</h2>
-    <p>Welcome to Coffee &amp; Conversations.<br>Enjoy the event!</p>
-  </div>
-</div>
+  </section>
+  <section class="success" id="successSection" aria-live="polite">
+    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#56744F"/><path d="M19 33.5l8.5 8.5L45 24.5" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2 id="successTitle">You’re signed in!</h2>
+    <p>Thanks for joining us for the last<br>Coffee &amp; Conversations of the year.</p>
+    <button type="button" class="again" id="againBtn">Sign in someone else</button>
+  </section>
+  <div class="foot">Fort Lauderdale Behavioral Health Center<br>951 NE 56th Street, Oakland Park, FL 33334</div>
+</main>
 <script>
-function handleSubmit(e){
-  e.preventDefault();
-  var fd=new FormData(e.target);
-  var data={};
-  fd.forEach(function(v,k){data[k]=v});
-  var entries=JSON.parse(localStorage.getItem('cc_signins')||'[]');
-  data.timestamp=new Date().toISOString();
-  entries.push(data);
-  localStorage.setItem('cc_signins',JSON.stringify(entries));
-  document.getElementById('formSection').style.display='none';
-  document.getElementById('successSection').style.display='block';
-  setTimeout(function(){
-    document.getElementById('formSection').style.display='block';
-    document.getElementById('successSection').style.display='none';
-    e.target.reset();
-  },3000);
-}
+(function(){
+  // Sign-ins go to the event_signins table (FLBHC Supabase project). The publishable key is
+  // public by design: row-level security lets visitors add a row and nothing else.
+  var SUPABASE_URL = 'https://mlcivpmqivfcqtukdbji.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_Azdfg9LMM58tcY-_k-cmsg_xFD0VVey';
+  var EVENT_NAME = 'Coffee & Conversations 2026-11-24';
+
+  var form = document.getElementById('signinForm');
+  var btn = document.getElementById('submitBtn');
+  var status = document.getElementById('status');
+
+  function send(row){
+    return fetch(SUPABASE_URL + '/rest/v1/event_signins', {
+      method: 'POST',
+      headers: {'apikey': SUPABASE_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal'},
+      body: JSON.stringify(row),
+      keepalive: true
+    }).then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); });
+  }
+  function wait(ms){ return new Promise(function(res){ setTimeout(res, ms); }); }
+  function val(id){ var v = (form.elements[id].value || '').trim(); return v === '' ? null : v; }
+
+  function showSuccess(name){
+    var first = name ? name.split(/\s+/)[0] : '';
+    document.getElementById('successTitle').textContent = first ? 'You\u2019re signed in, ' + first + '!' : 'You\u2019re signed in!';
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('successSection').style.display = 'block';
+    window.scrollTo(0, 0);
+  }
+
+  document.getElementById('againBtn').addEventListener('click', function(){
+    form.reset(); status.textContent = '';
+    document.getElementById('successSection').style.display = 'none';
+    document.getElementById('formSection').style.display = 'block';
+    window.scrollTo(0, 0);
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    status.textContent = '';
+    if (form.elements.website.value) { showSuccess(''); return; }   // bot trap
+    var name = val('name'), email = val('email');
+    if (!name) { status.textContent = 'Please add your name.'; form.elements.name.focus(); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { status.textContent = 'Please add a valid email.'; form.elements.email.focus(); return; }
+    var row = {
+      full_name: name, organization: val('organization'), title: val('title'), email: email,
+      phone: val('phone'), referral_interest: val('referralType'), heard_about: val('notes'),
+      event_name: EVENT_NAME
+    };
+    btn.disabled = true; btn.textContent = 'Signing in\u2026';
+    send(row)
+      .catch(function(){ return wait(1200).then(function(){ return send(row); }); })
+      .then(function(){ showSuccess(name); })
+      .catch(function(){ status.textContent = 'That didn\u2019t go through. Check your Wi-Fi or data and tap Sign In again.'; })
+      .then(function(){ btn.disabled = false; btn.textContent = 'Sign In'; });
+  });
+})();
 </script>
 </body>
 </html>
