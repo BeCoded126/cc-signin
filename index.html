@@ -36,14 +36,20 @@
   .row .v small{display:block;font-weight:500;color:var(--body);font-size:13px}
   form{margin-top:8px}
   label{display:block;font-size:13px;font-weight:700;color:var(--brown);margin:16px 0 6px}
-  label .opt{font-weight:500;color:var(--body)}
-  input,select,textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:16px;
+  label .opt,legend .opt{font-weight:500;color:var(--body)}
+  input:not([type=checkbox]),select,textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:16px;
     color:var(--brown);background:#fff;-webkit-appearance:none;appearance:none;transition:border-color .15s,box-shadow .15s}
   input::placeholder,textarea::placeholder{color:#B9A797}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(200,100,42,.15)}
+  input:not([type=checkbox]):focus,select:focus,textarea:focus{outline:none;border-color:var(--orange);box-shadow:0 0 0 3px rgba(200,100,42,.15)}
   select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%236E5A4E' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
     background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
   textarea{resize:vertical;min-height:64px}
+  .checks{border:0;margin:20px 0 0;padding:0;min-width:0}
+  .checks legend{display:block;font-size:13px;font-weight:700;color:var(--brown);margin:0 0 2px;padding:0}
+  .check{display:flex;align-items:center;gap:12px;min-height:50px;margin:8px 0 0;padding:12px 14px;border:1.5px solid var(--line);
+    border-radius:12px;font-size:15px;font-weight:600;color:var(--brown);cursor:pointer;transition:border-color .15s,background .15s}
+  .check input{flex:0 0 22px;width:22px;height:22px;margin:0;accent-color:var(--orange)}
+  .check:has(input:checked){border-color:var(--orange);background:#FFF8F2}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   .btn{display:block;width:100%;min-height:52px;padding:14px;margin-top:22px;background:var(--orange);color:#fff;border:0;border-radius:14px;
     font:inherit;font-size:17px;font-weight:800;letter-spacing:.01em;cursor:pointer;transition:background .15s,transform .1s}
@@ -99,6 +105,12 @@
         <option value="Detox">Detox</option>
         <option value="General Info">General Info / Networking</option>
       </select>
+      <fieldset class="checks">
+        <legend>Would you like any of these? <span class="opt">(check any or all)</span></legend>
+        <label class="check"><input type="checkbox" id="tour" name="tour"> A tour of FLBHC</label>
+        <label class="check"><input type="checkbox" id="inservice" name="inservice"> An in-service for your team</label>
+        <label class="check"><input type="checkbox" id="visit" name="visit"> A visit from our team</label>
+      </fieldset>
       <label for="notes">How did you hear about this event? <span class="opt">(optional)</span></label>
       <textarea id="notes" name="notes" rows="2" placeholder="Email, colleague, social media..."></textarea>
       <div class="hp" aria-hidden="true"><label for="website">Website</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
@@ -162,6 +174,8 @@
     var row = {
       full_name: name, organization: val('organization'), title: val('title'), email: email,
       phone: val('phone'), referral_interest: val('referralType'), heard_about: val('notes'),
+      wants_tour: form.elements.tour.checked, wants_inservice: form.elements.inservice.checked,
+      wants_visit: form.elements.visit.checked,
       event_name: EVENT_NAME
     };
     btn.disabled = true; btn.textContent = 'Signing in\u2026';
